@@ -26,7 +26,7 @@ class Nav extends Component {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/MyQuest" className="navbar">
+                        <NavLink to="/login" className="navbar">
                             Set Up Quest
                         </NavLink>
                     </li>

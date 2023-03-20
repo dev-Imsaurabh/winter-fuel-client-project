@@ -1,22 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./QuestDataR.css"
 import { AiOutlineAliyun } from "react-icons/ai";
 import { BsPeople } from "react-icons/bs";
+import { Box, Button, Flex, HStack } from '@chakra-ui/react';
+import { AUTO, FILL_30PARENT, FILL_40PARENT, FILL_PARENT } from '../../constants/typography';
+
 
 function QuestDataR(props) {
+    const [qbtn,setQbtn] = useState(true)
+const [pbtn,setPbtn] = useState(false)
     return (
-        <div className='ggg'>
-            <div className='QuestMaindiv'>
-                <button className='btn1q'>Quest</button>
-                <button className='btn1q'>Project info</button>
-            </div>
-            <div className='condiv'>
+        <Box   className="right"  width={{base:FILL_PARENT,sm:FILL_PARENT,lg:FILL_40PARENT}} >
+            <div className='QuestMaindiv' >
+                <Button style={{backgroundColor:qbtn?"#272B30":"#1A1D1F"}}  onClick={()=>{
+                    setQbtn((prev)=>!prev)
+                    setPbtn((prev)=>!prev)
 
-                <h3>{props.pname}</h3>
-                <div className='kdiv'>
-                    <p>By <img src={props.imgsrc} className='smallimg' alt="" /></p>
+                }}>Quest</Button>
+                <Button style={{backgroundColor:pbtn?"#272B30":"#1A1D1F"}}  onClick={()=>{
+                    setPbtn((prev)=>!prev)
+                    setQbtn((prev)=>!prev)
+
+
+                }}>Project info</Button>
+            </div>
+            <Box className='condiv'  width={{base:FILL_PARENT,sm:FILL_PARENT,lg:FILL_PARENT}}>
+
+                <Flex alignItems={"flex-start"} ><h3>{props.pname}</h3></Flex>
+                <HStack alignItems={"center"} className='kdiv'>
+                    <p>By</p>
+                    <img src={props.imgsrc} className='smallimg' alt="" />
                     <h5>{props.name}</h5>
-                </div>
+                </HStack>
                 <div className='paradiv'>
                     <p>
                         {props.para1}
@@ -54,9 +69,9 @@ function QuestDataR(props) {
 
 
 
-            </div>
+            </Box>
 
-        </div>
+        </Box>
     )
 }
 

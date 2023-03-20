@@ -7,13 +7,18 @@ import Quest from "./componet/page3/Quest"
 
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginPage from './componet/pages/LoginPage';
+import SignupPage from './componet/pages/SignupPage';
+import Navbar from './componet/page3/NavbarQ';
+import SetupQuest from './componet/pages/SetupQuest';
+import PrivateRoute from './routes/PrivateRoute';
 
 
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className='App'>
         <div id='meta'>
 
 
@@ -26,7 +31,10 @@ class App extends Component {
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
             <Route path='/MyQuest' element={<MyQuest />} />
-            <Route path='/Quest' element={<Quest />} />
+            <Route path='/Quest/:id' element={<Quest />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/signup' element={<SignupPage />} />
+            <Route path='/setup' element={<PrivateRoute><SetupQuest /></PrivateRoute>} />
           </Routes>
         </Router>
 

@@ -1,3 +1,4 @@
+
 #QuestMainDiv {
     width: 100%;
     height: 220vh;
@@ -19,9 +20,8 @@
 }
 
 #flexdiv {
-    width: 55%;
-    padding-top: 88px;
-    background-color: rgba(0, 0, 0, 0.235);
+    width: 100%;
+    /* border: 1px solid red; */
     height: 400px;
 }
 
@@ -43,3 +43,20 @@
         width: 100%;
     }
 }
+
+@keyframes slideDown{
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .down{
+    -webkit-animation: slideDown 1s;
+  }
+  
+  

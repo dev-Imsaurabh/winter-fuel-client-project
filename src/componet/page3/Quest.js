@@ -1,57 +1,73 @@
-import React from 'react'
-import Navbar from './NavbarQ'
-import "./quest.css"
-import QuestDataR from './QuestDataR'
-import imag1 from "../images/Firebond/div-1.png"
-import imga2 from "../images/image3.png"
-import QuestDataL from './QuestDataL'
+import React, { useEffect, useState } from "react";
+import Navbar from "./NavbarQ";
+import "./quest.css";
+import QuestDataR from "./QuestDataR";
+import imag1 from "../images/Firebond/div-1.png";
+import imga2 from "../images/image3.png";
+import QuestDataL from "./QuestDataL";
+import { TaskCard } from "../utility/TaskCard";
+import { Flex, HStack, VStack } from "@chakra-ui/react";
+import { AUTO, COLUMN, FILL_60PARENT, FILL_70PARENT, FILL_PARENT, ROW } from "../../constants/typography";
+import { useParams, useSearchParams } from "react-router-dom";
+import axios from "axios";
+import { GET_ONE_QUEST } from "../../apis/api";
+import { useSelector } from "react-redux";
 
 function Quest() {
-    return (
-        <div>
-            <Navbar />
-            <div id='QuestMainDiv'>
-                <div id="columdiv">
-                    <QuestDataR
-                        imgsrc={imag1}
-                        imgsrc2={imga2}
-                        hname="Reboot World "
-                        name="Reboot World"
-                        link="/Quest"
-                        pname="Reboot World"
-                        xppoints="30xp"
-                        task="5"
+
+  const [data,setData] = useState([])
+  let params = useParams()
+    let {id} = params 
+    let [loading,setLoading] = useState(false)
+
+    useEffect(()=>{
+      const getData = async()=>{
+        setLoading(true)
+        let res = await axios({
+          method:"get",
+          url:GET_ONE_QUEST(id),
+      
+        })
+        setData([res.data.data])
+        setLoading(false)
+      }
+
+      getData()
+      
+    },[])
+
+
+    console.log(data)
+  return (
+   data.length>0?<VStack  padding={{base:"16px"}} marginTop="100px" w={FILL_PARENT}>
+      <Navbar />
+      <Flex w={{base:FILL_PARENT,sm:FILL_PARENT,lg:FILL_70PARENT}} direction={{base:COLUMN,sm:COLUMN,md:COLUMN,lg:ROW}} bg={"transparent"} gap={"32px"} >
+        <QuestDataR
+                        imgsrc={data[0].cimage}
+                        imgsrc2={data[0].cimage}
+                        hname={data[0].cname}
+                        name={data[0].cname}
+                        link={"/Quest/"+data[0]._id}
+                        pname={data[0].name}
+                        xppoints={data[0].tokens}
+                        task={data[0].task.split("|").length}
                         ttask="5"
                         likes="687"
-                        para1="Spacekayak is a web3 native design studio helping 
-                        startups go from 0-1. This creative team is creating the next 
-                        stream of internet companies at the intersection of culture x tech x 
-                        community through their thesis of seamless on-chain experiences. "
+                        para1={data[0].description}
                         para2="Follow Twitter, subscribe to the Newsletter and share with your
                         frens on Twitter to get Cryptocity NFT Wall 
                         proof and a chance to win from $100 raffle"
                     />
 
-                </div>
-                <div id='flexdiv'>
-                    <QuestDataL
-                        nametask="Sign up - https://weekinweb3.substack.com/ a screenshot & upload here"
-                        xppoints="30xp"
-                    />
-                    <QuestDataL
-                        nametask="Sign up - https://weekinweb3.substack.com/ a screenshot & upload here"
-                        xppoints="30xp"
-                    />
-                    <QuestDataL
-                        nametask="Sign up - https://weekinweb3.substack.com/ a screenshot & upload here"
-                        xppoints="30xp"
-                    />
-                </div>
+        <VStack className="down" w={FILL_PARENT} alignItems="flex-start">
 
-            </div>
+       {data[0].task.split("|").map((el)=><TaskCard task={el.trim()} />)}
 
-        </div>
-    )
+          
+        </VStack>
+      </Flex>
+    </VStack>:""
+  );
 }
 
-export default Quest
+export default Quest;
