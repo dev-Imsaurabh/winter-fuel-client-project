@@ -50,9 +50,9 @@ export default function CreateTask({setTasks}) {
       <>
         <Button onClick={onOpen}>Create Task</Button>
   
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal  isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent bg="#111315">
+          <ModalContent margin={"16px"} bg="#111315">
             <ModalHeader>Create New Task</ModalHeader>
             <ModalCloseButton />
             <ModalBody>

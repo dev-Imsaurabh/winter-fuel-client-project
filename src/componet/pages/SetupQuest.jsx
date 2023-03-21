@@ -291,7 +291,7 @@ export default function SetupQuest() {
 
       <VStack
       className="dbody"
-        height="75%"
+        height="70%"
         overflow="auto"
         w={{
           base: FILL_90PARENT,
@@ -300,6 +300,8 @@ export default function SetupQuest() {
           lg: FILL_50PARENT,
         }}
         m={AUTO}
+        mt={"50px"}
+
       >
         {questData.map((el)=><QuestItem {...el} data={data} />)}
       </VStack>

@@ -27,9 +27,9 @@ export default function QuestCard({cname,cimage,sdate,edate,name,tokens,task,_id
                 </Flex>
 
                 <Flex gap={"16px"} w={FILL_PARENT} justifyContent={"start"} padding={"14px"}>
-                    <Image width={"74px"} borderRadius={"12px"} src={cimage}></Image>
+                    <Image width={"74px"} height={"74px"} borderRadius={"12px"} src={cimage}></Image>
                     <VStack alignItems={"flex-start"}>
-                        <Text>{sub}</Text>
+                        <Text fontSize={"16px"} fontWeight={"500"}>{sub}</Text>
                         <Badge  colorScheme={YELLOW} borderRadius={"50px"}>{tokens} xp</Badge>
                     </VStack>
                 </Flex>
