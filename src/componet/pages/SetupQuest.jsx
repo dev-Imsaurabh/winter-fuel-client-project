@@ -256,7 +256,7 @@ export default function SetupQuest() {
                 ></Input>
 
                 {tasks.map((el) => (
-                  <Wrap padding={"0px 8px"}>{el.split("~").join(" / ")}</Wrap>
+                  <Wrap padding={"0px 8px"}>{el.split("~").join(" - ")}</Wrap>
                 ))}
 
                 <CreateTask setTasks={setTasks} />

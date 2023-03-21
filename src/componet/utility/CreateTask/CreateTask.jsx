@@ -10,17 +10,18 @@ import {
     useDisclosure,
     Input,
     VStack,
+    useToast,
   } from '@chakra-ui/react'
 import { useState } from 'react'
  const taskObj = {
     tname:"",
     tlink:"",
-    tins:"",
     txp:""
   }
 export default function CreateTask({setTasks}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     let [task,setTask] =useState(taskObj)
+    let toast = useToast()
 
     const handleChange=(e)=>{
 
@@ -32,8 +33,23 @@ export default function CreateTask({setTasks}) {
     const createTask =()=>{
         let taskinfo = ""
         let i =0
+        if(!task.tlink.includes("https://")){
+          toast({
+            title: 'Invalid Link',
+            position:"top",
+            description: "Link must start from https://",
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
+                })
+                return
+          
+        }
         for(let x in task){
-            if(i<3){
+          // if(task[x]==""){
+          //   task[x]="~"
+          // }
+            if(i<2){
                 taskinfo+=task[x]+"~"
             }else{
                 taskinfo+=task[x]
@@ -57,9 +73,9 @@ export default function CreateTask({setTasks}) {
             <ModalCloseButton />
             <ModalBody>
                 <VStack>
-                <Input name="tname" placeholder='Task name'  onChange={handleChange}></Input>
-                <Input name="tlink"  placeholder='Task Link' onChange={handleChange}></Input>
-                <Input name="tins"  placeholder='Task Instruction' onChange={handleChange}></Input>
+                <Input name="tname" placeholder='Task name eg: Follow Twitter'  onChange={handleChange}></Input>
+                <Input name="tlink"  placeholder='https://' onChange={handleChange}></Input>
+                <Input display={"none"} name="tins"  placeholder='Task Instruction' onChange={handleChange}></Input>
                 <Input name="txp"  placeholder='Task xp' onChange={handleChange}></Input>
                 </VStack>
 

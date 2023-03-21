@@ -24,6 +24,7 @@ import {
   YELLOW,
 } from "../../../constants/typography";
 import "./task.css";
+import { Link } from "react-router-dom";
 
 export default function TaskCard({ task }) {
   const [expanded, setExpanded] = useState(false);
@@ -57,7 +58,8 @@ export default function TaskCard({ task }) {
 
               <Text margin={0} color={"#E6E6E6"}>
                 {" "}
-                <span>{task.split("~")[0]}</span>
+                <Link to={task.split("~")[1]} target="_blank" > {task.split("~")[0]}</Link>
+                
               </Text>
             </HStack>
 
@@ -70,7 +72,7 @@ export default function TaskCard({ task }) {
                 autoCapitalize="false"
                 colorScheme={YELLOW}
               >
-                {task.split("~")[3]} xp
+                {task.split("~")[2]} xp
               </Badge>
               <IoIosArrowDown
                 size={16}
@@ -87,13 +89,13 @@ export default function TaskCard({ task }) {
               />
             </HStack>
           </Flex>
-          <Flex w={FILL_PARENT} alignItems={"flex-start"}>
+          {/* <Flex w={FILL_PARENT} alignItems={"flex-start"}>
             {" "}
             <span style={{ display: expanded ? "block" : "none" }}>
               {"-> "}
               {task.split("~")[2]}
             </span>
-          </Flex>
+          </Flex> */}
           <Button
             variant={"outline"}
             display={expanded ? "block" : "none"}
@@ -110,3 +112,5 @@ export default function TaskCard({ task }) {
     </Card>
   );
 }
+
+
