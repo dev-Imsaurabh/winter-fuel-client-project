@@ -8,6 +8,10 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
 const theme = extendTheme({
+  config:{
+    initialColorMode: "dark",
+    useSystemColorMode: false,
+  },
   styles: {
     global: () => ({
       body: {
